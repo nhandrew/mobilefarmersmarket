@@ -10,7 +10,7 @@ Development of the application will be documented on my YouTube channel https://
 
 ## Episode History
 
-### Part 1: Application Concept
-### Part 2: App Setup and Routes
+### Part 1: Application Concept (No Branch)
+### Part 2: App Setup and Routes (Part2)
 
 
