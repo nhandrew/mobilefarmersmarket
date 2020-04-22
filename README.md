@@ -1,16 +1,14 @@
-# farmers_market
+# Farmer's Market Mobile Ordering Application
 
-A new Flutter project.
+This application will be similar to the Mobile Ordering system introduced by Walt Disney World where customers may place their order online and confirm their proximity to the market via location of the device.  The vendor can confirm their order accept payment by Stripe and let the customer know where they can pickup the order.  If desired, the vendor can confirm the customer by flashing the flash on their device.  The entire transaction can take place without any personal contact.
 
-## Getting Started
+This will be an open source project and anyone is welcome to fork, clone and use the code for their own purposes.  The application is meant to be of public use and the development is intended for educational purposes for Flutter developers. Each episide in the series will be a branch in the repository. 
 
-This project is a starting point for a Flutter application.
+Concepts introduced in the development of the application will include: Firebase, Firestore, 3rd Party Authentication, push notifications, provider, rxdart, cupertino scaffolding, plugins, geocoding, Strip, and Google Maps (and maybe more). 
 
-A few resources to get you started if this is your first Flutter project:
+Development of the application will be documented on my YouTube channel https://www.youtube.com/channel/UCSKeK_8IzsqwKQBJuIGJPaA
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Episode History
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Part 1: Application Concept (No Branch)
+### Part 2: App Setup and Routes
