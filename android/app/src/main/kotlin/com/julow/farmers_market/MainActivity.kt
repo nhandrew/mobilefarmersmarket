@@ -1,4 +1,4 @@
-package com.example.farmers_market
+package com.julow.farmers_market
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

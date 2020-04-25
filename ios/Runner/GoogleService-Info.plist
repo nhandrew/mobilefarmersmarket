@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>176096730439-lqmc4tefmon0f1i20upl4nci0nnfh587.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.176096730439-lqmc4tefmon0f1i20upl4nci0nnfh587</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>176096730439-jbrjftjukmud03mnkro156crhoog77qf.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD_hOduvwxmlNaOqi9cJ6U_E6pFbPLOoAY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>176096730439</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.julow.farmersMarket</string>
+	<key>PROJECT_ID</key>
+	<string>farmers-market-89c2a</string>
+	<key>STORAGE_BUCKET</key>
+	<string>farmers-market-89c2a.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:176096730439:ios:f48cf4c8ebd008fe720062</string>
+	<key>DATABASE_URL</key>
+	<string>https://farmers-market-89c2a.firebaseio.com</string>
+</dict>
+</plist>
