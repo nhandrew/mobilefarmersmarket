@@ -13,4 +13,5 @@ Development of the application will be documented on my YouTube channel https://
 ### Part 1: Application Concept (No Branch)
 ### Part 2: App Setup and Routes
 ### Part 3: App Platform Splitting
+### Part 4: Adding Firebase
 
