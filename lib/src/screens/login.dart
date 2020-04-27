@@ -1,7 +1,9 @@
+import 'package:farmers_market/src/styles/base.dart';
 import 'package:farmers_market/src/styles/textfields.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
+import '../styles/colors.dart';
 
 class Login extends StatelessWidget {
   @override
@@ -42,10 +44,19 @@ class Login extends StatelessWidget {
       ],
     );
   }
-
+ 
   Widget email(){
     if (Platform.isIOS){
-      return CupertinoTextField();
+      return CupertinoTextField(  
+        padding: EdgeInsets.all(12.0),
+        placeholder: 'Email',
+        placeholderStyle: TextFieldStyles.placeholder(),
+        style: TextFieldStyles.text(),
+        textAlign: TextFieldStyles.textAlign(),
+        cursorColor: TextFieldStyles.cursorColor(),
+        decoration: TextFieldStyles.cupertinoDecoration(),
+        prefix: TextFieldStyles.iconPrefix(CupertinoIcons.mail_solid),
+      );
     } else {
       return TextField();
     }
