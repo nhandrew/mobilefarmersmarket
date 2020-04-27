@@ -14,4 +14,6 @@ Development of the application will be documented on my YouTube channel https://
 ### Part 2: App Setup and Routes
 ### Part 3: App Platform Splitting
 ### Part 4: Adding Firebase
+### Part 5: Login Flow (No Branch)
+### Part 6: Login UI Part 1
 
