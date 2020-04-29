@@ -1,5 +1,6 @@
 import 'package:farmers_market/src/styles/base.dart';
 import 'package:farmers_market/src/styles/textfields.dart';
+import 'package:farmers_market/src/widgets/textfield.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
@@ -36,44 +37,24 @@ class Login extends StatelessWidget {
             image: DecorationImage(image: AssetImage('assets/images/logo.png')),
           ),
         ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: TextFieldStyles.textBoxHorizontal, vertical: TextFieldStyles.textBoxVertical),
-          child: email(),
+        AppTextField(  
+          isIOS: Platform.isIOS,
+          hintText: 'Email',
+          cupertinoIcon: CupertinoIcons.mail_solid,
+          materialIcon: Icons.email,
+          textInputType: TextInputType.emailAddress,
         ),
-        password(),
+        AppTextField( 
+          isIOS: Platform.isIOS,
+          hintText: 'Password',
+          cupertinoIcon: IconData(0xf4c9,fontFamily: CupertinoIcons.iconFont, fontPackage: CupertinoIcons.iconFontPackage),
+          materialIcon: Icons.lock,
+          obscureText: true,
+        )
       ],
     );
   }
  
-  Widget email(){
-    if (Platform.isIOS){
-      return CupertinoTextField(  
-        keyboardType: TextInputType.emailAddress,
-        padding: EdgeInsets.all(12.0),
-        placeholder: 'Email',
-        placeholderStyle: TextFieldStyles.placeholder,
-        style: TextFieldStyles.text,
-        textAlign: TextFieldStyles.textAlign,
-        cursorColor: TextFieldStyles.cursorColor,
-        decoration: TextFieldStyles.cupertinoDecoration,
-        prefix: TextFieldStyles.iconPrefix(CupertinoIcons.mail_solid),
-      );
-    } else {
-      return TextField(  
-        keyboardType: TextInputType.emailAddress,
-        cursorColor: TextFieldStyles.cursorColor,
-        style:TextFieldStyles.text,
-        textAlign: TextFieldStyles.textAlign,
-        decoration: TextFieldStyles.materialDecoration('Email', Icons.email),
-      );
-    }
-  }
 
-  Widget password(){
-    if (Platform.isIOS){
-      return CupertinoTextField();
-    } else {
-      return TextField();
-    }
-  }
+ 
 }
