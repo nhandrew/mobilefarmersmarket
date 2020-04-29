@@ -1,5 +1,7 @@
 import 'package:farmers_market/src/styles/base.dart';
+import 'package:farmers_market/src/styles/buttons.dart';
 import 'package:farmers_market/src/styles/textfields.dart';
+import 'package:farmers_market/src/widgets/button.dart';
 import 'package:farmers_market/src/widgets/textfield.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +52,8 @@ class Login extends StatelessWidget {
           cupertinoIcon: IconData(0xf4c9,fontFamily: CupertinoIcons.iconFont, fontPackage: CupertinoIcons.iconFontPackage),
           materialIcon: Icons.lock,
           obscureText: true,
-        )
+        ),
+        AppButton(buttonText: 'Login',buttonType: ButtonType.LightBlue,),
       ],
     );
   }
