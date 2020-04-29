@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 abstract class TextStyles {
-  static TextStyle body() {
+  static TextStyle get body {
     return GoogleFonts.roboto(
-        textStyle: TextStyle(color: AppColors.darkgray(), fontSize: 16.0));
+        textStyle: TextStyle(color: AppColors.darkgray, fontSize: 16.0));
   }
 
-   static TextStyle suggestion() {
+   static TextStyle get suggestion {
     return GoogleFonts.roboto(
-        textStyle: TextStyle(color: AppColors.lightgray(), fontSize: 14.0));
+        textStyle: TextStyle(color: AppColors.lightgray, fontSize: 14.0));
   }
 
 }
