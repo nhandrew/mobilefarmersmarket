@@ -15,5 +15,8 @@ Development of the application will be documented on my YouTube channel https://
 ### Part 3: App Platform Splitting
 ### Part 4: Adding Firebase
 ### Part 5: Login Flow (No Branch)
-### Part 6: Login UI Part 1
+### Part 6: Login UI
+### Part 7: Cupertino TextField (in Part8 branch)
+### Part 8: Material TextField
+### Part 9: Application TextField
 
