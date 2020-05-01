@@ -1,9 +1,12 @@
 import 'package:farmers_market/src/styles/base.dart';
 import 'package:farmers_market/src/styles/buttons.dart';
+import 'package:farmers_market/src/styles/text.dart';
 import 'package:farmers_market/src/styles/textfields.dart';
 import 'package:farmers_market/src/widgets/button.dart';
+import 'package:farmers_market/src/widgets/social_button.dart';
 import 'package:farmers_market/src/widgets/textfield.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import '../styles/colors.dart';
@@ -54,6 +57,34 @@ class Login extends StatelessWidget {
           obscureText: true,
         ),
         AppButton(buttonText: 'Login',buttonType: ButtonType.LightBlue,),
+        Center(child: Text('Or',style: TextStyles.suggestion),),
+        Padding(
+          padding: BaseStyles.listPadding,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              AppSocialButton(socialType: SocialType.Facebook,),
+              AppSocialButton(socialType: SocialType.Google),
+          ],),
+        ),
+        Padding( 
+          padding: BaseStyles.listPadding,
+          child: RichText( 
+            textAlign: TextAlign.center,
+            text: TextSpan(  
+              text: 'New Here? ',
+              style: TextStyles.body, 
+              children: [ 
+                TextSpan(  
+                  text: 'Signup',
+                  style: TextStyles.link,
+                  recognizer: TapGestureRecognizer()
+                      ..onTap = () => Navigator.pushNamed(context, '/signup')
+                )
+              ]
+            )
+          ),
+        )
       ],
     );
   }
