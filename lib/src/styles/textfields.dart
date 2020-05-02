@@ -4,9 +4,9 @@ import 'package:farmers_market/src/styles/text.dart';
 import 'package:flutter/material.dart';
 
 abstract class TextFieldStyles {
-  static double get textBoxHorizontal => 25.0;
+  static double get textBoxHorizontal => BaseStyles.listFieldHorizontal;
 
-  static double get textBoxVertical => 8.0;
+  static double get textBoxVertical => BaseStyles.listFieldVertical;
 
   static TextStyle get text => TextStyles.body;
 
