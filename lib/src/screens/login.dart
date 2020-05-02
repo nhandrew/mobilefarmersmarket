@@ -54,13 +54,16 @@ class Login extends StatelessWidget {
           obscureText: true,
         ),
         AppButton(buttonText: 'Login',buttonType: ButtonType.LightBlue,),
+        SizedBox(height: 6.0,),
         Center(child: Text('Or',style: TextStyles.suggestion),),
+        SizedBox(height: 6.0,),
         Padding(
           padding: BaseStyles.listPadding,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               AppSocialButton(socialType: SocialType.Facebook,),
+              SizedBox(width:15.0),
               AppSocialButton(socialType: SocialType.Google),
           ],),
         ),
