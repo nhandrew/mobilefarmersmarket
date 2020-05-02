@@ -1,7 +1,5 @@
 import 'package:farmers_market/src/styles/base.dart';
-import 'package:farmers_market/src/styles/buttons.dart';
 import 'package:farmers_market/src/styles/text.dart';
-import 'package:farmers_market/src/styles/textfields.dart';
 import 'package:farmers_market/src/widgets/button.dart';
 import 'package:farmers_market/src/widgets/social_button.dart';
 import 'package:farmers_market/src/widgets/textfield.dart';
@@ -9,7 +7,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
-import '../styles/colors.dart';
 
 class Login extends StatelessWidget {
   @override
@@ -57,13 +54,16 @@ class Login extends StatelessWidget {
           obscureText: true,
         ),
         AppButton(buttonText: 'Login',buttonType: ButtonType.LightBlue,),
+        SizedBox(height: 6.0,),
         Center(child: Text('Or',style: TextStyles.suggestion),),
+        SizedBox(height: 6.0,),
         Padding(
           padding: BaseStyles.listPadding,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               AppSocialButton(socialType: SocialType.Facebook,),
+              SizedBox(width:15.0),
               AppSocialButton(socialType: SocialType.Google),
           ],),
         ),

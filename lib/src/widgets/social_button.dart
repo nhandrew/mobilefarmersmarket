@@ -33,9 +33,7 @@ class AppSocialButton extends StatelessWidget {
         break;
     }
 
-    return Padding(
-      padding: BaseStyles.listPadding,
-      child: Container(
+    return Container(
         height: ButtonStyles.buttonHeight,
         width: ButtonStyles.buttonHeight,
         decoration: BoxDecoration(
@@ -43,8 +41,7 @@ class AppSocialButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(BaseStyles.borderRadius),
             boxShadow: BaseStyles.boxShadow),
         child: Icon(icon, color: iconColor),
-      ),
-    );
+      );
   }
 }
 
