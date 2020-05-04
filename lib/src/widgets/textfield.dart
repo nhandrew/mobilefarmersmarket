@@ -9,6 +9,8 @@ class AppTextField extends StatelessWidget{
   final IconData cupertinoIcon;
   final TextInputType textInputType;
   final bool obscureText;
+  final void Function(String) onChanged;
+  final String errorText;
 
   AppTextField({ 
     @required this.isIOS,
@@ -16,7 +18,9 @@ class AppTextField extends StatelessWidget{
     @required this.cupertinoIcon,
     @required this.materialIcon,
     this.textInputType = TextInputType.text,
-    this.obscureText = false
+    this.obscureText = false,
+    this.onChanged,
+    this.errorText,
   });
 
   @override
@@ -45,8 +49,9 @@ class AppTextField extends StatelessWidget{
           cursorColor: TextFieldStyles.cursorColor,
           style:TextFieldStyles.text,
           textAlign: TextFieldStyles.textAlign,
-          decoration: TextFieldStyles.materialDecoration(hintText, materialIcon),
+          decoration: TextFieldStyles.materialDecoration(hintText, materialIcon,errorText),
           obscureText: obscureText,
+          onChanged: onChanged,
         ),
       );
     }

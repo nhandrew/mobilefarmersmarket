@@ -32,12 +32,14 @@ abstract class TextFieldStyles {
         borderRadius: BorderRadius.circular(BaseStyles.borderRadius));
   }
 
-  static InputDecoration materialDecoration(String hintText, IconData icon) {
+  static InputDecoration materialDecoration(
+      String hintText, IconData icon, String errorText) {
     return InputDecoration(
       contentPadding: EdgeInsets.all(8.0),
       hintText: hintText,
       hintStyle: TextFieldStyles.placeholder,
       border: InputBorder.none,
+      errorText: errorText,
       focusedBorder: OutlineInputBorder(
           borderSide:
               BorderSide(color: AppColors.straw, width: BaseStyles.borderWidth),
@@ -45,6 +47,14 @@ abstract class TextFieldStyles {
       enabledBorder: OutlineInputBorder(
           borderSide:
               BorderSide(color: AppColors.straw, width: BaseStyles.borderWidth),
+          borderRadius: BorderRadius.circular(BaseStyles.borderRadius)),
+      focusedErrorBorder: OutlineInputBorder(
+          borderSide:
+              BorderSide(color: AppColors.straw, width: BaseStyles.borderWidth),
+          borderRadius: BorderRadius.circular(BaseStyles.borderRadius)),
+      errorBorder: OutlineInputBorder(
+          borderSide:
+              BorderSide(color: AppColors.red, width: BaseStyles.borderWidth),
           borderRadius: BorderRadius.circular(BaseStyles.borderRadius)),
       prefixIcon: iconPrefix(icon),
     );
