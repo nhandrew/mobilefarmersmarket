@@ -28,6 +28,8 @@ dependencies:
   cloud_firestore: ^0.13.5
   google_fonts: ^1.0.0
   font_awesome_flutter: ^8.8.1
+  rxdart: ^0.24.0
+  provider: ^4.0.5+1
 
 dev_dependencies:
   flutter_test:
