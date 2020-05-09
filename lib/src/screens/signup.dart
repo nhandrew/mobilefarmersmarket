@@ -74,7 +74,7 @@ class Signup extends StatelessWidget{
         StreamBuilder<bool>(
           stream: authBloc.isValid,
           builder: (context, snapshot) {
-            return AppButton(buttonText: 'Signup',buttonType: (snapshot.data == true) ? ButtonType.LightBlue : ButtonType.Disabled,);
+            return AppButton(buttonText: 'Signup',buttonType: (snapshot.data == true) ? ButtonType.LightBlue : ButtonType.Disabled, onPressed: authBloc.signupEmail,);
           }
         ),
         SizedBox(height: 6.0,),

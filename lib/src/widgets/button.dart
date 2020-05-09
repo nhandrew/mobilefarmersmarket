@@ -7,10 +7,12 @@ import 'package:flutter/material.dart';
 class AppButton extends StatefulWidget{
   final String buttonText;
   final ButtonType buttonType;
+  final void Function() onPressed;
 
   AppButton({
     @required this.buttonText,
-    this.buttonType
+    this.buttonType,
+    this.onPressed
   });
 
   @override
@@ -82,7 +84,7 @@ class _AppButtonState extends State<AppButton> {
         },
         onTap: (){
           if (widget.buttonType != ButtonType.Disabled) {
-            
+            widget.onPressed();
           }
         },
       ),
