@@ -9,6 +9,6 @@ class FirestoreService {
   }
 
   Future<User> fetchUser(String userId){
-    return _db.collection('users').document(userId).get().then((doc) => User.fromFirestore(doc.data));
+    return _db.collection('users').document(userId).get().then((snapshot) => User.fromFirestore(snapshot.data));
   }
 }
