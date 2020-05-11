@@ -8,7 +8,7 @@ abstract class Routes {
 
   static MaterialPageRoute materialRoutes(RouteSettings settings){
     switch(settings.name){
-      case "/":
+      case "/landing":
       return MaterialPageRoute(builder: (context) => Landing());
       case "/signup":
       return MaterialPageRoute(builder: (context) => Signup());
@@ -21,7 +21,7 @@ abstract class Routes {
 
     static CupertinoPageRoute cupertinoRoutes(RouteSettings settings){
     switch(settings.name){
-      case "/":
+      case "/landing":
       return CupertinoPageRoute(builder: (context) => Landing());
       case "/signup":
       return CupertinoPageRoute(builder: (context) => Signup());
