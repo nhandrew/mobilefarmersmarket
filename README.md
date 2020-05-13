@@ -19,4 +19,16 @@ Development of the application will be documented on my YouTube channel https://
 ### Part 7: Cupertino TextField (in Part8 branch)
 ### Part 8: Material TextField
 ### Part 9: Application TextField
+### Part 10: Application Buttons
+### Part 11: Social Media Buttons
+### Part 12: Signup UI
+### Part 13: Why RXDart? (no branch)
+### Part 14: TheAuth BLoC
+### Part 15: Material Validation
+### Part 16: Cupertino Validation
+### Part 17: Submit Button Revisited
+### Part 18: Adding the First User
+### Part 19: User Story Mapping
+### Part 20: Logging In
+### Part 21: IOS Sliver AppBar
 
