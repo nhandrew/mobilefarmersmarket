@@ -11,6 +11,10 @@ abstract class BaseStyles{
 
   static double get listFieldVertical => 8.0;
 
+  static double get animationOffset => 2.0;
+
+
+
   static EdgeInsets get listPadding {
     return EdgeInsets.symmetric(horizontal: listFieldHorizontal, vertical: listFieldVertical);
   }
@@ -21,6 +25,16 @@ abstract class BaseStyles{
         color: AppColors.darkgray.withOpacity(.5),
         offset: Offset(1.0, 2.0),
         blurRadius: 2.0,
+      )
+    ];
+  }
+
+   static List<BoxShadow> get boxShadowPressed {
+    return [
+      BoxShadow(  
+        color: AppColors.darkgray.withOpacity(.5),
+        offset: Offset(1.0, 1.0),
+        blurRadius: 1.0,
       )
     ];
   }
