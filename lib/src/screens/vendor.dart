@@ -1,4 +1,5 @@
 import 'package:farmers_market/src/widgets/navbar.dart';
+import 'package:farmers_market/src/widgets/vendor_scaffold.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
@@ -15,7 +16,7 @@ class Vendor extends StatelessWidget {
               AppNavbar.cupertinoNavBar(title: 'Vendor Name', context:context),
             ];
           }, 
-          body: Center(child: Text('Placeholder'),)),
+          body: VendorScaffold.cupertinoTabScaffold),
       );
     } else {
       return Center(child: Scaffold(body: Text('Material'),));
