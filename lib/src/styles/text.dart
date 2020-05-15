@@ -18,6 +18,13 @@ abstract class TextStyles {
             fontWeight: FontWeight.bold));
   }
 
+  static TextStyle get navTitleMaterial {
+    return GoogleFonts.poppins(
+        textStyle: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold));
+  }
+
   static TextStyle get body {
     return GoogleFonts.roboto(
         textStyle: TextStyle(color: AppColors.darkgray, fontSize: 16.0));
