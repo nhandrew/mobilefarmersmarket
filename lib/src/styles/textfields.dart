@@ -14,12 +14,7 @@ abstract class TextFieldStyles {
 
   static Color get cursorColor => AppColors.darkblue;
 
-  static Widget iconPrefix(IconData icon) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 8.0),
-      child: Icon(icon, size: 35.0, color: AppColors.lightblue),
-    );
-  }
+  static Widget iconPrefix(IconData icon) => BaseStyles.iconPrefix(icon);
 
   static TextAlign get textAlign => TextAlign.center;
 
