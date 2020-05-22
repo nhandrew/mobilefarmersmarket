@@ -22,7 +22,7 @@ abstract class AppSliverScaffold {
         body: NestedScrollView(
             headerSliverBuilder:
                 (BuildContext context, bool innerBoxIsScrolled) {
-              return <Widget>[AppNavbar.materialNavBar(title: navTitle)];
+              return <Widget>[AppNavbar.materialNavBar(title: navTitle,pinned: false)];
             },
             body: pageBody));
   }
