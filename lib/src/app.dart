@@ -1,4 +1,5 @@
 import 'package:farmers_market/src/blocs/auth_bloc.dart';
+import 'package:farmers_market/src/blocs/product_bloc.dart';
 import 'package:farmers_market/src/routes.dart';
 import 'package:farmers_market/src/screens/landing.dart';
 import 'package:farmers_market/src/screens/login.dart';
@@ -10,6 +11,7 @@ import 'dart:io';
 
 import 'package:provider/provider.dart';
 final authBloc = AuthBloc();
+final productBloc = ProductBloc();
 
 class App extends StatefulWidget {
   @override
@@ -22,6 +24,7 @@ class _AppState extends State<App> {
     return MultiProvider(
       providers: [
         Provider(create: (context) => authBloc),
+        Provider(create: (context) => productBloc),
         FutureProvider(create: (context) => authBloc.isLoggedIn())
       ],
       child: PlatformApp());
@@ -30,6 +33,7 @@ class _AppState extends State<App> {
   @override
   void dispose() {
     authBloc.dispose();
+    productBloc.displose();
     super.dispose();
   }
 }
