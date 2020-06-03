@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/subjects.dart';
 
 class ProductBloc {
@@ -13,6 +14,7 @@ class ProductBloc {
   Stream<String> get unitType => _unitType.stream;
   Stream<double> get unitPrice => _unitPrice.stream.transform(validateUnitPrice);
   Stream<int> get availableUnits => _availableUnits.stream.transform(validateAvailableUnits);
+  Stream<bool> get isValid => CombineLatestStream.combine4(productName, unitType, unitPrice, availableUnits, (a, b, c, d) =>  true);
 
   //Set
   Function(String) get changeProductName => _productName.sink.add;
