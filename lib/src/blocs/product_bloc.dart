@@ -26,6 +26,7 @@ class ProductBloc {
       _availableUnits.stream.transform(validateAvailableUnits);
   Stream<bool> get isValid => CombineLatestStream.combine4(
       productName, unitType, unitPrice, availableUnits, (a, b, c, d) => true);
+  Stream<List<Product>> productByVendorId(String vendorId) => db.fetchProductsByVendorId(vendorId);
 
   //Set
   Function(String) get changeProductName => _productName.sink.add;
