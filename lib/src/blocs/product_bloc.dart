@@ -12,6 +12,7 @@ class ProductBloc {
   final _unitPrice = BehaviorSubject<String>();
   final _availableUnits = BehaviorSubject<String>();
   final _vendorId = BehaviorSubject<String>();
+  final _productSaved = PublishSubject<bool>();
 
   final db = FirestoreService();
   var uuid = Uuid();
@@ -27,6 +28,8 @@ class ProductBloc {
   Stream<bool> get isValid => CombineLatestStream.combine4(
       productName, unitType, unitPrice, availableUnits, (a, b, c, d) => true);
   Stream<List<Product>> productByVendorId(String vendorId) => db.fetchProductsByVendorId(vendorId);
+  Stream<bool> get productSaved => _productSaved.stream;
+  Future<Product>  fetchProduct(String productId) => db.fetchProduct(productId);
 
   //Set
   Function(String) get changeProductName => _productName.sink.add;
@@ -56,8 +59,8 @@ class ProductBloc {
 
     return db
         .addProduct(product)
-        .then((value) => print('Product Saved'))
-        .catchError((error) => print(error));
+        .then((value) => _productSaved.sink.add(true))
+        .catchError((error) => _productSaved.sink.add(false));
   }
 
   //Validators

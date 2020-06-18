@@ -31,6 +31,11 @@ class FirestoreService {
         .setData(product.toMap());
   }
 
+  Future<Product> fetchProduct(String productId){
+    return _db.collection('products').document(productId)
+    .get().then((snapshot) => Product.fromFirestore(snapshot.data));
+  }
+
   Stream<List<Product>> fetchProductsByVendorId(String vendorId) {
     return _db
         .collection('products')
