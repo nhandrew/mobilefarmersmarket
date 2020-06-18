@@ -25,6 +25,7 @@ class AuthBloc {
   Stream<bool> get isValid => CombineLatestStream.combine2(email, password, (email,password)=> true);
   Stream<User> get user => _user.stream;
   Stream<String> get errorMessage => _errorMessage.stream;
+  String get userId => _user.value.userId;
 
   //Set Data
   Function(String) get changeEmail => _email.sink.add;
