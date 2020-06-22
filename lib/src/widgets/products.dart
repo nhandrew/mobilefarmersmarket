@@ -54,11 +54,14 @@ class Products extends StatelessWidget {
           itemCount: snapshot.data.length,
           itemBuilder: (context, index){
             var product = snapshot.data[index];
-            return AppCard(
-              availableUnits: product.availableUnits,
-              price: product.unitPrice,
-              productName: product.productName,
-              unitType: product.unitType, 
+            return GestureDetector(
+                          child: AppCard(
+                availableUnits: product.availableUnits,
+                price: product.unitPrice,
+                productName: product.productName,
+                unitType: product.unitType, 
+              ),
+              onTap: () => Navigator.of(context).pushNamed('/editproduct/${product.productId}'),
             );
           });
       }

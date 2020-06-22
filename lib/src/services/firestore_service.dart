@@ -24,7 +24,7 @@ class FirestoreService {
             .toList());
   }
 
-  Future<void> addProduct(Product product) {
+  Future<void> setProduct(Product product) {
     return _db
         .collection('products')
         .document(product.productId)

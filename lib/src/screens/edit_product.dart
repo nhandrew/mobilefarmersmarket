@@ -1,3 +1,4 @@
+import 'package:farmers_market/src/app.dart';
 import 'package:farmers_market/src/blocs/auth_bloc.dart';
 import 'package:farmers_market/src/blocs/product_bloc.dart';
 import 'package:farmers_market/src/models/product.dart';
@@ -44,27 +45,40 @@ class _EditProductState extends State<EditProduct> {
       future: productBloc.fetchProduct(widget.productId),
       builder: (context, snapshot) {
         if (!snapshot.hasData && widget.productId != null) {
-          return Center(child: (Platform.isIOS) 
-          ? CupertinoActivityIndicator()
-          : CircularProgressIndicator());
+          return Center(
+              child: (Platform.isIOS)
+                  ? CupertinoActivityIndicator()
+                  : CircularProgressIndicator());
         }
 
         //TODO LOAD BLOC VALUES
+        Product existingProduct;
+
+        if (widget.productId != null) {
+          //Edit Logic
+          existingProduct = snapshot.data;
+          loadValues(productBloc, existingProduct, authBloc.userId);
+        } else {
+          //Add Logic
+          loadValues(productBloc, null, authBloc.userId);
+        }
 
         return (Platform.isIOS)
             ? AppSliverScaffold.cupertinoSliverScaffold(
                 navTitle: '',
-                pageBody: pageBody(true, productBloc, context),
+                pageBody: pageBody(true, productBloc, context, existingProduct),
                 context: context)
             : AppSliverScaffold.materialSliverScaffold(
                 navTitle: '',
-                pageBody: pageBody(false, productBloc, context),
+                pageBody:
+                    pageBody(false, productBloc, context, existingProduct),
                 context: context);
       },
     );
   }
 
-  Widget pageBody(bool isIOS, ProductBloc productBloc, BuildContext context) {
+  Widget pageBody(bool isIOS, ProductBloc productBloc, BuildContext context,
+      Product existingProduct) {
     var items = Provider.of<List<String>>(context);
     return ListView(
       children: <Widget>[
@@ -86,6 +100,9 @@ class _EditProductState extends State<EditProduct> {
                 materialIcon: FontAwesomeIcons.shoppingBasket,
                 isIOS: isIOS,
                 errorText: snapshot.error,
+                initialText: (existingProduct != null)
+                    ? existingProduct.productName
+                    : null,
                 onChanged: productBloc.changeProductName,
               );
             }),
@@ -111,6 +128,9 @@ class _EditProductState extends State<EditProduct> {
                 isIOS: isIOS,
                 textInputType: TextInputType.number,
                 errorText: snapshot.error,
+                initialText: (existingProduct != null)
+                    ? existingProduct.unitPrice.toString()
+                    : null,
                 onChanged: productBloc.changeUnitPrice,
               );
             }),
@@ -124,6 +144,9 @@ class _EditProductState extends State<EditProduct> {
                 isIOS: isIOS,
                 textInputType: TextInputType.number,
                 errorText: snapshot.error,
+                initialText: (existingProduct != null)
+                    ? existingProduct.availableUnits.toString()
+                    : null,
                 onChanged: productBloc.changeAvailableUnits,
               );
             }),
@@ -142,4 +165,26 @@ class _EditProductState extends State<EditProduct> {
       ],
     );
   }
+
+
+  loadValues(ProductBloc productBloc, Product product, String vendorId){
+    productBloc.changeProduct(product);
+    productBloc.changeVendorId(vendorId);
+
+    if (product != null){
+      //Edit
+      productBloc.changeUnitType(product.unitType);
+      productBloc.changeProductName(product.productName);
+      productBloc.changeUnitPrice(product.unitPrice.toString());
+      productBloc.changeAvailableUnits(product.availableUnits.toString());
+    } else {
+      //Add
+      productBloc.changeUnitType(null);
+      productBloc.changeProductName(null);
+      productBloc.changeUnitPrice(null);
+      productBloc.changeAvailableUnits(null);
+    }
+
+  }
+
 }
