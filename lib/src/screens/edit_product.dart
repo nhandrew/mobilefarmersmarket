@@ -12,6 +12,7 @@ import 'package:farmers_market/src/widgets/sliver_scaffold.dart';
 import 'package:farmers_market/src/widgets/textfield.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:io';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -31,7 +32,18 @@ class _EditProductState extends State<EditProduct> {
   void initState() {
     var productBloc = Provider.of<ProductBloc>(context, listen: false);
     productBloc.productSaved.listen((saved) {
-      if (saved != null && saved == true) Navigator.of(context).pop();
+      if (saved != null && saved == true && context != null) {
+        Fluttertoast.showToast(
+            msg: "Product Saved",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 2,
+            backgroundColor: AppColors.lightblue,
+            textColor: Colors.white,
+            fontSize: 16.0);
+
+        Navigator.of(context).pop();
+      }
     });
     super.initState();
   }
@@ -45,13 +57,14 @@ class _EditProductState extends State<EditProduct> {
       future: productBloc.fetchProduct(widget.productId),
       builder: (context, snapshot) {
         if (!snapshot.hasData && widget.productId != null) {
-          return Center(
-              child: (Platform.isIOS)
-                  ? CupertinoActivityIndicator()
-                  : CircularProgressIndicator());
+          return Scaffold(
+            body: Center(
+                child: (Platform.isIOS)
+                    ? CupertinoActivityIndicator()
+                    : CircularProgressIndicator()),
+          );
         }
 
-        //TODO LOAD BLOC VALUES
         Product existingProduct;
 
         if (widget.productId != null) {
@@ -80,10 +93,11 @@ class _EditProductState extends State<EditProduct> {
   Widget pageBody(bool isIOS, ProductBloc productBloc, BuildContext context,
       Product existingProduct) {
     var items = Provider.of<List<String>>(context);
+    var pageLabel = (existingProduct != null) ? 'Edit Product' : 'Add Product';
     return ListView(
       children: <Widget>[
         Text(
-          'Add Product',
+          pageLabel,
           style: TextStyles.subtitle,
           textAlign: TextAlign.center,
         ),
@@ -166,12 +180,11 @@ class _EditProductState extends State<EditProduct> {
     );
   }
 
-
-  loadValues(ProductBloc productBloc, Product product, String vendorId){
+  loadValues(ProductBloc productBloc, Product product, String vendorId) {
     productBloc.changeProduct(product);
     productBloc.changeVendorId(vendorId);
 
-    if (product != null){
+    if (product != null) {
       //Edit
       productBloc.changeUnitType(product.unitType);
       productBloc.changeProductName(product.productName);
@@ -184,7 +197,5 @@ class _EditProductState extends State<EditProduct> {
       productBloc.changeUnitPrice(null);
       productBloc.changeAvailableUnits(null);
     }
-
   }
-
 }

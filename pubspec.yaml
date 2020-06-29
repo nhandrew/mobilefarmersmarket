@@ -30,7 +30,7 @@ dependencies:
   font_awesome_flutter: ^8.8.1
   rxdart: ^0.24.0
   provider: ^4.0.5+1
-  cupertino_toolbar: ^1.0.0
+  fluttertoast: ^4.0.1
   uuid: ^2.0.4
   intl: ^0.16.1
 
