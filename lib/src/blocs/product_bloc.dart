@@ -1,7 +1,11 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:farmers_market/src/models/product.dart';
+import 'package:farmers_market/src/services/firebase_storage_service.dart';
 import 'package:farmers_market/src/services/firestore_service.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:uuid/uuid.dart';
@@ -11,12 +15,15 @@ class ProductBloc {
   final _unitType = BehaviorSubject<String>();
   final _unitPrice = BehaviorSubject<String>();
   final _availableUnits = BehaviorSubject<String>();
+  final _imageUrl = BehaviorSubject<String>();
   final _vendorId = BehaviorSubject<String>();
   final _productSaved = PublishSubject<bool>();
   final _product = BehaviorSubject<Product>();
 
   final db = FirestoreService();
   var uuid = Uuid();
+  final _picker = ImagePicker();
+  final storageService = FirebaseStorageService();
 
   //Get
   Stream<String> get productName =>
@@ -26,6 +33,7 @@ class ProductBloc {
       _unitPrice.stream.transform(validateUnitPrice);
   Stream<int> get availableUnits =>
       _availableUnits.stream.transform(validateAvailableUnits);
+  Stream<String> get imageUrl => _imageUrl.stream;
   Stream<bool> get isValid => CombineLatestStream.combine4(
       productName, unitType, unitPrice, availableUnits, (a, b, c, d) => true);
   Stream<List<Product>> productByVendorId(String vendorId) =>
@@ -38,6 +46,7 @@ class ProductBloc {
   Function(String) get changeUnitType => _unitType.sink.add;
   Function(String) get changeUnitPrice => _unitPrice.sink.add;
   Function(String) get changeAvailableUnits => _availableUnits.sink.add;
+  Function(String) get changeImageUrl => _imageUrl.sink.add;
   Function(String) get changeVendorId => _vendorId.sink.add;
   Function(Product) get changeProduct => _product.sink.add;
 
@@ -49,8 +58,10 @@ class ProductBloc {
     _vendorId.close();
     _productSaved.close();
     _product.close();
+    _imageUrl.close();
   }
 
+  //Functions
   Future<void> saveProduct() async {
     var product = Product(
       approved: (_product.value == null) ? true : _product.value.approved,
@@ -61,12 +72,36 @@ class ProductBloc {
       unitPrice: double.parse(_unitPrice.value),
       unitType: _unitType.value,
       vendorId: _vendorId.value,
+      imageUrl: _imageUrl.value
     );
 
     return db
         .setProduct(product)
         .then((value) => _productSaved.sink.add(true))
         .catchError((error) => _productSaved.sink.add(false));
+  }
+
+  pickImage() async {
+    PickedFile image;
+
+    await Permission.photos.request();
+
+    var permissionStatus = await Permission.photos.status;
+    if (permissionStatus.isGranted) {
+      //Get Image From Device
+      image = await _picker.getImage(source: ImageSource.gallery);
+
+      //Upload to Firebase
+      if (image != null) {
+        var imageUrl = await storageService.uploadProductImage(
+            File(image.path), uuid.v4());
+        changeImageUrl(imageUrl);
+      } else {
+        print('No Path Received');
+      }
+    } else {
+      print('Grant Permissions and try again');
+    }
   }
 
   //Validators

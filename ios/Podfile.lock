@@ -181,6 +181,9 @@ PODS:
   - Firebase/Firestore (6.14.0):
     - Firebase/CoreOnly
     - FirebaseFirestore (~> 1.8.2)
+  - Firebase/Storage (6.14.0):
+    - Firebase/CoreOnly
+    - FirebaseStorage (~> 3.4.3)
   - firebase_auth (0.0.1):
     - Firebase/Auth (~> 6.3)
     - Firebase/Core
@@ -191,6 +194,9 @@ PODS:
     - Firebase/Core
     - Flutter
   - firebase_core_web (0.1.0):
+    - Flutter
+  - firebase_storage (0.0.1):
+    - Firebase/Storage
     - Flutter
   - FirebaseAnalytics (6.1.7):
     - FirebaseCore (~> 6.5)
@@ -237,7 +243,13 @@ PODS:
     - FirebaseCore (~> 6.5)
     - GoogleUtilities/Environment (~> 6.4)
     - GoogleUtilities/UserDefaults (~> 6.4)
+  - FirebaseStorage (3.4.3):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 6.0)
+    - GTMSessionFetcher/Core (~> 1.1)
   - Flutter (1.0.0)
+  - flutter_plugin_android_lifecycle (0.0.1):
+    - Flutter
   - fluttertoast (0.0.2):
     - Flutter
   - GoogleAppMeasurement (6.1.7):
@@ -285,6 +297,8 @@ PODS:
     - nanopb (~> 0.3)
   - gRPC-Core/Interface (1.21.0)
   - GTMSessionFetcher/Core (1.3.1)
+  - image_picker (0.0.1):
+    - Flutter
   - leveldb-library (1.22)
   - nanopb (0.3.9011):
     - nanopb/decode (= 0.3.9011)
@@ -295,6 +309,8 @@ PODS:
     - Flutter
   - path_provider_macos (0.0.1):
     - Flutter
+  - "permission_handler (5.0.1+1)":
+    - Flutter
 
 DEPENDENCIES:
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
@@ -303,10 +319,14 @@ DEPENDENCIES:
   - firebase_auth_web (from `.symlinks/plugins/firebase_auth_web/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_core_web (from `.symlinks/plugins/firebase_core_web/ios`)
+  - firebase_storage (from `.symlinks/plugins/firebase_storage/ios`)
   - Flutter (from `Flutter`)
+  - flutter_plugin_android_lifecycle (from `.symlinks/plugins/flutter_plugin_android_lifecycle/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
+  - image_picker (from `.symlinks/plugins/image_picker/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - path_provider_macos (from `.symlinks/plugins/path_provider_macos/ios`)
+  - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -330,6 +350,8 @@ SPEC REPOS:
     - GTMSessionFetcher
     - leveldb-library
     - nanopb
+  trunk:
+    - FirebaseStorage
 
 EXTERNAL SOURCES:
   cloud_firestore:
@@ -344,14 +366,22 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_core/ios"
   firebase_core_web:
     :path: ".symlinks/plugins/firebase_core_web/ios"
+  firebase_storage:
+    :path: ".symlinks/plugins/firebase_storage/ios"
   Flutter:
     :path: Flutter
+  flutter_plugin_android_lifecycle:
+    :path: ".symlinks/plugins/flutter_plugin_android_lifecycle/ios"
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
+  image_picker:
+    :path: ".symlinks/plugins/image_picker/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
   path_provider_macos:
     :path: ".symlinks/plugins/path_provider_macos/ios"
+  permission_handler:
+    :path: ".symlinks/plugins/permission_handler/ios"
 
 SPEC CHECKSUMS:
   abseil: 18063d773f5366ff8736a050fe035a28f635fd27
@@ -363,6 +393,7 @@ SPEC CHECKSUMS:
   firebase_auth_web: 0955c07bcc06e84af76b9d4e32e6f31518f2d7de
   firebase_core: 0d8be0e0d14c4902953aeb5ac5d7316d1fe4b978
   firebase_core_web: d501d8b946b60c8af265428ce483b0fff5ad52d1
+  firebase_storage: 22966fce4aa6e8848cbaa017df62107cee29f327
   FirebaseAnalytics: f68b9f3f1241385129ae0a83b63627fc420c05e5
   FirebaseAuth: 831577b184ecaba38bc886768c1c22a450cc44e3
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
@@ -371,7 +402,9 @@ SPEC CHECKSUMS:
   FirebaseCoreDiagnosticsInterop: e9b1b023157e3a2fc6418b5cb601e79b9af7b3a0
   FirebaseFirestore: 52120e2833f804a874ba1a9f59aab864a8ae2286
   FirebaseInstanceID: ce993a3c3670a8f5d47ce371ac5d143c560608c5
+  FirebaseStorage: 93fe2f8190a01bfb2b2c4932df7d679744c4ef1d
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  flutter_plugin_android_lifecycle: dc0b544e129eebb77a6bfb1239d4d1c673a60a35
   fluttertoast: b644586ef3b16f67fae9a1f8754cef6b2d6b634b
   GoogleAppMeasurement: db118eb61a97dd8c4f7014e368d3c335cbbcf80a
   GoogleDataTransport: 8e9b210c97d55fbff306cc5468ff91b9cb32dcf5
@@ -380,10 +413,12 @@ SPEC CHECKSUMS:
   "gRPC-C++": 9dfe7b44821e7b3e44aacad2af29d2c21f7cde83
   gRPC-Core: c9aef9a261a1247e881b18059b84d597293c9947
   GTMSessionFetcher: cea130bbfe5a7edc8d06d3f0d17288c32ffe9925
+  image_picker: 66aa71bc96850a90590a35d4c4a2907b0d823109
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
   path_provider_macos: f760a3c5b04357c380e2fddb6f9db6f3015897e0
+  permission_handler: eac8e15b4a1a3fba55b761d19f3f4e6b005d15b6
 
 PODFILE CHECKSUM: 1b66dae606f75376c5f2135a8290850eeb09ae83
 

@@ -33,6 +33,10 @@ dependencies:
   fluttertoast: ^4.0.1
   uuid: ^2.0.4
   intl: ^0.16.1
+  image_picker: ^0.6.7+3
+  firebase_storage: ^3.1.6
+  permission_handler: ^5.0.1+1
+
 
 dev_dependencies:
   flutter_test:

@@ -164,7 +164,21 @@ class _EditProductState extends State<EditProduct> {
                 onChanged: productBloc.changeAvailableUnits,
               );
             }),
-        AppButton(buttonType: ButtonType.Straw, buttonText: 'Add Image'),
+        StreamBuilder<String>(
+          stream: productBloc.imageUrl,
+          builder: (context, snapshot) {
+            if (!snapshot.hasData || snapshot.data == "")
+            return AppButton(buttonType: ButtonType.Straw, buttonText: 'Add Image',onPressed: productBloc.pickImage,);
+
+            return Column(children: <Widget>[
+              Padding(
+                padding: BaseStyles.listPadding,
+                child: Image.network(snapshot.data),
+              ),
+              AppButton(buttonType: ButtonType.Straw, buttonText: 'Change Image',onPressed: productBloc.pickImage,)
+            ],);
+          }
+        ),
         StreamBuilder<bool>(
             stream: productBloc.isValid,
             builder: (context, snapshot) {
@@ -190,12 +204,14 @@ class _EditProductState extends State<EditProduct> {
       productBloc.changeProductName(product.productName);
       productBloc.changeUnitPrice(product.unitPrice.toString());
       productBloc.changeAvailableUnits(product.availableUnits.toString());
+      productBloc.changeImageUrl(product.imageUrl ?? '');
     } else {
       //Add
       productBloc.changeUnitType(null);
       productBloc.changeProductName(null);
       productBloc.changeUnitPrice(null);
       productBloc.changeAvailableUnits(null);
+      productBloc.changeImageUrl('');
     }
   }
 }
