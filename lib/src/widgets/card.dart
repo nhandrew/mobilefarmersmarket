@@ -10,6 +10,7 @@ class AppCard extends StatelessWidget {
   final int availableUnits;
   final double price;
   final String note;
+  final String imageUrl;
 
   final formatCurrency = NumberFormat.simpleCurrency();
 
@@ -18,6 +19,7 @@ class AppCard extends StatelessWidget {
     @required this.unitType,
     @required this.availableUnits,
     @required this.price,
+    this.imageUrl,
     this.note = "",
   });
 
@@ -41,7 +43,10 @@ class AppCard extends StatelessWidget {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.only(right: 10.0, bottom: 10.0, top: 10.0),
-                child: Image.asset('assets/images/vegetables.png', height: 100.0,),
+                child: (imageUrl != null && imageUrl != "") 
+                ? ClipRRect(child: Image.network(imageUrl, height: 100.0,)
+                ,borderRadius: BorderRadius.circular(5.0),)
+                : Image.asset('assets/images/vegetables.png', height: 100.0,),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

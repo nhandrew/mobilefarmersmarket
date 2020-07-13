@@ -164,6 +164,15 @@ class _EditProductState extends State<EditProduct> {
                 onChanged: productBloc.changeAvailableUnits,
               );
             }),
+        StreamBuilder<bool>(
+          stream: productBloc.isUploading,
+          builder: (context,snapshot){
+            return (!snapshot.hasData || snapshot.data == false)
+            ? Container()
+            : Center(child: (Platform.isIOS) 
+            ? CupertinoActivityIndicator() 
+            : CircularProgressIndicator(),);
+          },),
         StreamBuilder<String>(
           stream: productBloc.imageUrl,
           builder: (context, snapshot) {

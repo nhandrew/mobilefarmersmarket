@@ -36,6 +36,7 @@ dependencies:
   image_picker: ^0.6.7+3
   firebase_storage: ^3.1.6
   permission_handler: ^5.0.1+1
+  flutter_native_image: ^0.0.5+2
 
 
 dev_dependencies:

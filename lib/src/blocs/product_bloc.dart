@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:farmers_market/src/models/product.dart';
 import 'package:farmers_market/src/services/firebase_storage_service.dart';
 import 'package:farmers_market/src/services/firestore_service.dart';
+import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:rxdart/rxdart.dart';
@@ -19,6 +20,7 @@ class ProductBloc {
   final _vendorId = BehaviorSubject<String>();
   final _productSaved = PublishSubject<bool>();
   final _product = BehaviorSubject<Product>();
+  final _isUploading = BehaviorSubject<bool>();
 
   final db = FirestoreService();
   var uuid = Uuid();
@@ -40,6 +42,7 @@ class ProductBloc {
       db.fetchProductsByVendorId(vendorId);
   Stream<bool> get productSaved => _productSaved.stream;
   Future<Product> fetchProduct(String productId) => db.fetchProduct(productId);
+  Stream<bool> get isUploading => _isUploading.stream;
 
   //Set
   Function(String) get changeProductName => _productName.sink.add;
@@ -59,6 +62,7 @@ class ProductBloc {
     _productSaved.close();
     _product.close();
     _imageUrl.close();
+    _isUploading.close();
   }
 
   //Functions
@@ -83,6 +87,7 @@ class ProductBloc {
 
   pickImage() async {
     PickedFile image;
+    File croppedFile;
 
     await Permission.photos.request();
 
@@ -93,9 +98,29 @@ class ProductBloc {
 
       //Upload to Firebase
       if (image != null) {
+        _isUploading.sink.add(true);
+
+        //Get Image Properties
+        ImageProperties properties = await FlutterNativeImage.getImageProperties(image.path);
+
+        //CropImage
+        if (properties.height > properties.width){
+          var yoffset = (properties.height - properties.width)/2;
+          croppedFile = await FlutterNativeImage.cropImage(image.path, 0, yoffset.toInt(), properties.width, properties.width);
+        } else if (properties.width > properties.height) {
+          var xoffset = (properties.width- properties.height)/2;
+          croppedFile = await FlutterNativeImage.cropImage(image.path, xoffset.toInt(), 0, properties.height, properties.height);
+        } else {
+          croppedFile = File(image.path);
+        }
+
+        //Resize
+        File compressedFile = await FlutterNativeImage.compressImage(croppedFile.path,quality: 100, targetHeight: 600, targetWidth: 600);
+
         var imageUrl = await storageService.uploadProductImage(
-            File(image.path), uuid.v4());
+            compressedFile, uuid.v4());
         changeImageUrl(imageUrl);
+        _isUploading.sink.add(false);
       } else {
         print('No Path Received');
       }

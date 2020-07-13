@@ -42,6 +42,7 @@ class Products extends StatelessWidget {
                           price: product.unitPrice,
                           productName: product.productName,
                           unitType: product.unitType,
+                          imageUrl: product.imageUrl,
                         ),
                         onTap: () => Navigator.of(context)
                             .pushNamed('/editproduct/${product.productId}'),
