@@ -47,6 +47,7 @@ class AppCard extends StatelessWidget {
                 ? ClipRRect(child: Image.network(imageUrl, height: 100.0,)
                 ,borderRadius: BorderRadius.circular(5.0),)
                 : Image.asset('assets/images/vegetables.png', height: 100.0,),
+                child: Image.asset('assets/images/vegetables.png', height: 100.0,),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

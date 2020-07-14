@@ -1,3 +1,5 @@
+import 'package:cupertino_toolbar/cupertino_toolbar.dart';
+import 'package:farmers_market/src/app.dart';
 import 'package:farmers_market/src/blocs/auth_bloc.dart';
 import 'package:farmers_market/src/blocs/product_bloc.dart';
 import 'package:farmers_market/src/models/product.dart';
@@ -16,8 +18,8 @@ class Products extends StatelessWidget {
     var productBloc = Provider.of<ProductBloc>(context);
     var authBloc = Provider.of<AuthBloc>(context);
 
-    return pageBody(productBloc, context, authBloc.userId);
-  }
+  return pageBody(productBloc, context, authBloc.userId);
+
 
   Widget pageBody(
       ProductBloc productBloc, BuildContext context, String vendorId) {
@@ -64,5 +66,50 @@ class Products extends StatelessWidget {
             ],
           );
         });
+    if (Platform.isIOS) {
+      return CupertinoPageScaffold(
+        child: CupertinoToolbar(
+          items: <CupertinoToolbarItem>[
+            CupertinoToolbarItem(
+                icon: CupertinoIcons.add_circled,
+                onPressed: () =>
+                    Navigator.of(context).pushNamed('/editproduct'))
+          ],
+          body: pageBody(productBloc,context,authBloc.userId),
+        ),
+      );
+    } else {
+      return Scaffold(
+        body: pageBody(productBloc,context,authBloc.userId),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: AppColors.straw,
+          child: Icon(Icons.add),
+          onPressed: () => Navigator.of(context).pushNamed('/editproduct'),
+        ),
+      );
+    }
+  }
+
+  Widget pageBody(ProductBloc productBloc, BuildContext context, String vendorId) {
+    return StreamBuilder<List<Product>>(
+      stream: productBloc.productByVendorId(vendorId),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return (Platform.isIOS)
+        ? CupertinoActivityIndicator()
+        : CircularProgressIndicator();
+
+        return ListView.builder(
+          itemCount: snapshot.data.length,
+          itemBuilder: (context, index){
+            var product = snapshot.data[index];
+            return AppCard(
+              availableUnits: product.availableUnits,
+              price: product.unitPrice,
+              productName: product.productName,
+              unitType: product.unitType, 
+            );
+          });
+      }
+    );
   }
 }

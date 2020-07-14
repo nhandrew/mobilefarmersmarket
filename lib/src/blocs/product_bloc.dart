@@ -44,6 +44,7 @@ class ProductBloc {
   Future<Product> fetchProduct(String productId) => db.fetchProduct(productId);
   Stream<bool> get isUploading => _isUploading.stream;
 
+
   //Set
   Function(String) get changeProductName => _productName.sink.add;
   Function(String) get changeUnitType => _unitType.sink.add;
