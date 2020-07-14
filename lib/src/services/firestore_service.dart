@@ -24,11 +24,16 @@ class FirestoreService {
             .toList());
   }
 
-  Future<void> addProduct(Product product) {
+  Future<void> setProduct(Product product) {
     return _db
         .collection('products')
         .document(product.productId)
         .setData(product.toMap());
+  }
+
+  Future<Product> fetchProduct(String productId){
+    return _db.collection('products').document(productId)
+    .get().then((snapshot) => Product.fromFirestore(snapshot.data));
   }
 
   Stream<List<Product>> fetchProductsByVendorId(String vendorId) {
