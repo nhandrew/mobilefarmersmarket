@@ -1,4 +1,5 @@
 import 'package:farmers_market/src/blocs/auth_bloc.dart';
+import 'package:farmers_market/src/blocs/customer_bloc.dart';
 import 'package:farmers_market/src/blocs/product_bloc.dart';
 import 'package:farmers_market/src/routes.dart';
 import 'package:farmers_market/src/screens/landing.dart';
@@ -13,6 +14,7 @@ import 'dart:io';
 import 'package:provider/provider.dart';
 final authBloc = AuthBloc();
 final productBloc = ProductBloc();
+final customerBloc = CustomerBloc();
 final firestoreService = FirestoreService();
 
 class App extends StatefulWidget {
@@ -27,6 +29,7 @@ class _AppState extends State<App> {
       providers: [
         Provider(create: (context) => authBloc),
         Provider(create: (context) => productBloc),
+        Provider(create: (context) => customerBloc,),
         FutureProvider(create: (context) => authBloc.isLoggedIn()),
         StreamProvider(create: (context) => firestoreService.fetchUnitTypes())
       ],
@@ -37,6 +40,7 @@ class _AppState extends State<App> {
   void dispose() {
     authBloc.dispose();
     productBloc.dispose();
+    customerBloc.dispose();
     super.dispose();
   }
 }
