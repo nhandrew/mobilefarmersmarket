@@ -5,11 +5,15 @@ import 'package:farmers_market/src/styles/tabbar.dart';
 import 'package:farmers_market/src/widgets/customer_scaffold.dart';
 import 'package:farmers_market/src/widgets/navbar.dart';
 import 'package:farmers_market/src/widgets/orders.dart';
+import 'package:farmers_market/src/widgets/products_customer.dart';
 import 'package:farmers_market/src/widgets/products.dart';
 import 'package:farmers_market/src/widgets/profile.dart';
+import 'package:farmers_market/src/widgets/profile_customer.dart';
+import 'package:farmers_market/src/widgets/shopping_bag.dart';
 import 'package:farmers_market/src/widgets/vendor_scaffold.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:io';
 
 import 'package:provider/provider.dart';
@@ -31,7 +35,7 @@ class Customer extends StatefulWidget {
       indicatorColor: TabBarStyles.indicatorColor ,
       tabs: <Widget>[
         Tab(icon: Icon(Icons.list)),
-        Tab(icon: Icon(Icons.shopping_cart)),
+        Tab(icon: Icon(FontAwesomeIcons.shoppingBag)),
         Tab(icon: Icon(Icons.person)),
       ],
     );
@@ -84,9 +88,9 @@ class _CustomerState extends State<Customer> {
               ];
             },
             body: TabBarView(children: <Widget>[
-              Products(),
-              Orders(),
-              Profile(),
+              ProductsCustomer(),
+              ShoppingBag(),
+              ProfileCustomer(),
             ],)
           )
         ),

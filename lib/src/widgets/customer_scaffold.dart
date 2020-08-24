@@ -1,8 +1,9 @@
 import 'package:farmers_market/src/styles/colors.dart';
-import 'package:farmers_market/src/widgets/orders.dart';
-import 'package:farmers_market/src/widgets/products.dart';
-import 'package:farmers_market/src/widgets/profile.dart';
+import 'package:farmers_market/src/widgets/products_customer.dart';
+import 'package:farmers_market/src/widgets/profile_customer.dart';
+import 'package:farmers_market/src/widgets/shopping_bag.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 abstract class CustomerScaffold {
   static CupertinoTabScaffold get cupertinoTabScaffold {
@@ -21,7 +22,7 @@ abstract class CustomerScaffold {
         BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.create), title: Text('Products')),
         BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.shopping_cart), title: Text('Orders')),
+            icon: Icon(FontAwesomeIcons.shoppingBag), title: Text('Orders')),
         BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.person), title: Text('Profile')),
       ],
@@ -30,13 +31,13 @@ abstract class CustomerScaffold {
 
   static Widget _pageSelection(int index) {
     if (index == 0) {
-      return Products();
+      return ProductsCustomer();
     }
 
     if (index == 1) {
-      return Orders();
+      return ShoppingBag();
     }
 
-    return Profile();
+    return ProfileCustomer();
   }
 }
