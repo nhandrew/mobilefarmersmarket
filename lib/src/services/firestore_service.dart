@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:farmers_market/src/models/market.dart';
 import 'package:farmers_market/src/models/product.dart';
 import 'package:farmers_market/src/models/user.dart';
 
@@ -46,4 +47,26 @@ class FirestoreService {
             snapshot.map((document) => Product.fromFirestore(document.data))
         .toList());
   }
+
+  Stream<List<Market>> fetchUpcomingMarkets(){
+    return _db
+      .collection('markets')
+      .where('dateEnd', isGreaterThan: DateTime.now().toIso8601String())
+      .snapshots()
+      .map((query) => query.documents)
+      .map((snapshot) => snapshot
+      .map((document) => Market.fromFirestore(document.data))
+      .toList());
+  }
+
+  Stream<List<Product>> fetchAvailableProducts(){
+    return _db  
+      .collection('products')
+      .where('availableUnits', isGreaterThan: 0)
+      .snapshots()
+      .map((query) => query.documents)
+      .map((snapshot) => snapshot.map((document) => Product.fromFirestore(document.data))
+      .toList());
+  }
+
 }
