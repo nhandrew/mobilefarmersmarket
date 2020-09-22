@@ -2,7 +2,7 @@ import 'package:farmers_market/src/app.dart';
 import 'package:farmers_market/src/blocs/auth_bloc.dart';
 import 'package:farmers_market/src/blocs/product_bloc.dart';
 import 'package:farmers_market/src/models/product.dart';
-import 'package:farmers_market/src/models/user.dart';
+import 'package:farmers_market/src/models/application_user.dart';
 import 'package:farmers_market/src/styles/base.dart';
 import 'package:farmers_market/src/styles/colors.dart';
 import 'package:farmers_market/src/styles/text.dart';
