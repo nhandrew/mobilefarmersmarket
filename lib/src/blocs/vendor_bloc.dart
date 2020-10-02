@@ -7,6 +7,7 @@ import 'package:farmers_market/src/services/firestore_service.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:uuid/uuid.dart';
 
@@ -33,12 +34,15 @@ class VendorBloc {
   Stream<bool> get vendorSaved => _vendorSaved.stream;
   Stream<Vendor> get vendor => _vendor.stream;
   Stream<bool> get isUploading => _isUploading.stream;
+  Stream<bool> get isValid => CombineLatestStream.combine2(
+      name, description, (a, b) => true);
 
   //Setters
   Function(String) get changeName => _name.sink.add;
   Function(String) get changeDescription => _description.sink.add;
   Function(String) get changeImageUrl => _imageUrl.sink.add;
   Function(Vendor) get changeVendor => _vendor.sink.add;
+  Function(String) get changeVendorId => _vendorId.sink.add;
 
   //Dispose
   dispose() {
