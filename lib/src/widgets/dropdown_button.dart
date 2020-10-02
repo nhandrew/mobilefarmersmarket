@@ -90,7 +90,7 @@ class AppDropdownButton extends StatelessWidget {
   }
 
   List<DropdownMenuItem<String>> buildMaterialItems(List<String> items) {
-    return items
+    return (items != null) ? items
         .map((item) => DropdownMenuItem<String>(
               child: Text(
                 item,
@@ -98,7 +98,7 @@ class AppDropdownButton extends StatelessWidget {
               ),
               value: item,
             ))
-        .toList();
+        .toList() : [];
   }
 
   List<Widget> buildCupertinoItems(List<String> items) {
