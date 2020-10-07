@@ -1,4 +1,10 @@
 import 'package:farmers_market/src/blocs/auth_bloc.dart';
+import 'package:farmers_market/src/blocs/vendor_bloc.dart';
+import 'package:farmers_market/src/models/vendor.dart';
+import 'package:farmers_market/src/styles/base.dart';
+import 'package:farmers_market/src/styles/colors.dart';
+import 'package:farmers_market/src/styles/text.dart';
+import 'package:farmers_market/src/widgets/button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
@@ -21,26 +27,73 @@ class Profile extends StatelessWidget {
 
   Widget pageBody(BuildContext context) {
     var authBloc = Provider.of<AuthBloc>(context);
-    // return Center(
-    //     child: (Platform.isIOS)
-    //         ? CupertinoButton(
-    //             child: Text('Logout'),
-    //             onPressed: () => authBloc.logout(),
-    //           )
-    //         : FlatButton(
-    //             child: Text('Logout'),
-    //             onPressed: () => authBloc.logout(),
-    //           ));
+    final vendorBloc = Provider.of<VendorBloc>(context);
 
-              return Center(
-        child: (Platform.isIOS)
-            ? CupertinoButton(
-                child: Text('Add'),
-                onPressed: () => Navigator.of(context).pushNamed('/editvendor') ,
-              )
-            : FlatButton(
-                child: Text('Add'),
-                onPressed: () => Navigator.of(context).pushNamed('/editvendor'),
-              ));
+    return StreamBuilder<Vendor>(
+        stream: vendorBloc.vendor,
+        builder: (context, snapshot) {
+          return Column(
+            children: [
+              Expanded(
+                  child: (snapshot.data != null)
+                      ? ListView(
+                          children: [
+                            Padding(
+                              padding: BaseStyles.listPadding,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Flexible(
+                                    flex: 2,
+                                      child: ClipRRect(
+                                    child: Image.network(snapshot.data.imageUrl),
+                                    borderRadius: BorderRadius.circular(
+                                      BaseStyles.borderRadius,
+                                    ),
+                                  )),
+                                  SizedBox(width:15.0),
+                                  Flexible(  
+                                    flex: 3,
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                      Text(snapshot.data.name,style:TextStyles.listTitle),
+                                      Text(snapshot.data.description,style:TextStyles.body)
+                                    ],),
+                                  )
+                                ],
+                              ),
+                            ),
+                            AppButton(buttonText: 'Edit Vendor Profile',
+                            buttonType: ButtonType.LightBlue,
+                            onPressed: () => Navigator.of(context).pushNamed('/editvendor/${authBloc.userId}'),)
+                          ],
+                        )
+                      : Center(
+                          child: AppButton(
+                            buttonText: 'Create a Vendor Profile',
+                            buttonType: ButtonType.LightBlue,
+                            onPressed: () =>
+                                Navigator.of(context).pushNamed('/editvendor'),
+                          ),
+                        )),
+              Container(
+                  height: 50.0,
+                  child: (Platform.isIOS)
+                      ? CupertinoButton(
+                          child: Text(
+                            'Logout',
+                            style: TextStyle(color: AppColors.straw),
+                          ),
+                          onPressed: () => authBloc.logout(),
+                        )
+                      : FlatButton(
+                          child: Text('Logout',
+                              style: TextStyle(color: AppColors.straw)),
+                          onPressed: () => authBloc.logout(),
+                        ))
+            ],
+          );
+        });
   }
 }
